@@ -71,7 +71,7 @@ env = Environment(
     CPPPATH=ASTYLE_SOURCE_DIR
 )
 
-env['TARGET_ARCH'] = target_arch
+env['TARGET_ARCH'] = target_arch.lower()
 plat = env['PLATFORM']
 arch = env['TARGET_ARCH']
 
@@ -111,7 +111,7 @@ elif plat == 'darwin':  # Darwin
     env.AppendUnique(LINKFLAGS=['-arch i386', '-arch x86_64'])
 else:  # Linux 'POSIX'
     if arch == 'x86_64' or arch == 'amd64' or arch == 'emt64':
-        lib_filename = 'astyle_x64'
+        lib_filename = 'astyle64'
         env.AppendUnique(CXXFLAGS='-m64')
         env.AppendUnique(LINKFLAGS='-m64')
     else:
