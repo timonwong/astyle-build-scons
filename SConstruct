@@ -36,7 +36,7 @@ def _has_option(name):
     x = get_option(name)
     if x is None:
         return False
-    if not x:
+    if x == False:
         return False
     if x == "":
         return False
@@ -59,19 +59,18 @@ add_option("32", "Whether to force 32 bit (No effect on OSX)", 0, "force32")
 force32 = has_option("force32")
 force64 = has_option("force64")
 
-target_arch = platform.machine()
+target_arch = platform.machine().lower()
 if force32:
     target_arch = 'x86'
 if force64:
     target_arch = 'x86_64'
 
-
 env = Environment(
     CPPDEFINES=['ASTYLE_LIB'],
-    CPPPATH=ASTYLE_SOURCE_DIR
+    CPPPATH=ASTYLE_SOURCE_DIR,
+    TARGET_ARCH = target_arch
 )
 
-env['TARGET_ARCH'] = target_arch.lower()
 plat = env['PLATFORM']
 arch = env['TARGET_ARCH']
 
