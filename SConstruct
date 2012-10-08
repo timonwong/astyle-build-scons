@@ -68,7 +68,7 @@ if force64:
 env = Environment(
     CPPDEFINES=['ASTYLE_LIB'],
     CPPPATH=ASTYLE_SOURCE_DIR,
-    TARGET_ARCH = target_arch
+    TARGET_ARCH=target_arch
 )
 
 plat = env['PLATFORM']
@@ -106,8 +106,8 @@ if plat == 'win32':  # Windows
 elif plat == 'darwin':  # Darwin
     variant_sub_dir = plat
 
-    env.AppendUnique(CXXFLAGS=['-arch i386', '-arch x86_64'])
-    env.AppendUnique(LINKFLAGS=['-arch i386', '-arch x86_64'])
+    env.Append(CXXFLAGS=['-arch', 'i386', '-arch', 'x86_64'])
+    env.Append(LINKFLAGS=['-arch', 'i386', '-arch', 'x86_64'])
 else:  # Linux 'POSIX'
     if arch == 'x86_64' or arch == 'amd64' or arch == 'emt64':
         lib_filename = 'astyle64'
